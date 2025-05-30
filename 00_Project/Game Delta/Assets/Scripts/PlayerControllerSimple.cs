@@ -10,11 +10,12 @@ public class PlayerControllerSimple : MonoBehaviour
 	private Rigidbody2D _rigidbody;
 
 	// Movement
-	private Vector2 _movement;
-	private bool _facingRight = true;
+	private Vector2 _movementHorizontal;
+    private Vector2 _movementVertical;
+    private bool _facingRight = true;
+	private bool _isAttacking = false;
 
-
-	void Awake()
+    void Awake()
 	{
 		_rigidbody = GetComponent<Rigidbody2D>();
 	}
@@ -31,10 +32,10 @@ public class PlayerControllerSimple : MonoBehaviour
 		{
 			// Movement
 			float horizontalInput = Input.GetAxisRaw("Horizontal");
-			_movement = new Vector2(horizontalInput, 0f);
+            _movementHorizontal = new Vector2(horizontalInput, 0f);
 
             float verticalInput = Input.GetAxisRaw("Vertical");
-            _movement = new Vector2(horizontalInput, 0f);
+            _movementVertical = new Vector2(0f, verticalInput);
 
             // Flip character (Se usará, pero hay que extenderlo cara a Up, Down, Left, Right)
             /*	if (horizontalInput < 0f && _facingRight == true) 
@@ -51,11 +52,18 @@ public class PlayerControllerSimple : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		if (_isAttacking == false) {
-			float horizontalVelocity = _movement.normalized.x * speed;
+		if (_isAttacking == false) 
+		{
+			float horizontalVelocity = _movementHorizontal.normalized.x * speed;
 			_rigidbody.linearVelocity = new Vector2(horizontalVelocity, _rigidbody.linearVelocity.y);
 		}
-	}
+
+        if (_isAttacking == false)
+        {
+            float verticalVelocity = _movementVertical.normalized.y * speed;
+            _rigidbody.linearVelocity = new Vector2(_rigidbody.linearVelocity.x, verticalVelocity);
+        }
+    }
 
 	/*private void Flip()
 	*{
