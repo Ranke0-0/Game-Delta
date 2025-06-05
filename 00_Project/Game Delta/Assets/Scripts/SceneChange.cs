@@ -9,7 +9,6 @@ public class SceneChange : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)  // Permite detectar cuando un objeto ha entrado en tu área definida
     {
-        Debug.Log("Another collider with name " + other.gameObject.name + " HAS ENTERED in my area");
         ChangeScene();
     }
 
