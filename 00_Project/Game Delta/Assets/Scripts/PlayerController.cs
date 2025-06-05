@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControllerSimple : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
 	public float speed = 2.5f;
 
@@ -15,8 +15,7 @@ public class PlayerControllerSimple : MonoBehaviour
 	float verticalInput;
 
     // Directions
-    private Vector2 _movementHorizontal;
-    private Vector2 _movementVertical;
+    private Vector2 _movement;
 
     //private bool _facingRight = true;
     private bool _isAttacking = false; //Eing?
@@ -41,16 +40,7 @@ public class PlayerControllerSimple : MonoBehaviour
             float horizontalInput = Input.GetAxisRaw("Horizontal");
             float verticalInput = Input.GetAxisRaw("Vertical");
 
-			if (horizontalInput != 0f)										//Movimiento horizontal
-			{
-                _movementHorizontal = new Vector2(horizontalInput, 0f);
-				_movementVertical = new Vector2(0f, 0f);
-			}
-			else															//Movimiento vertical
-			{
-                _movementVertical = new Vector2(0f, verticalInput);
-                _movementHorizontal = new Vector2(0f, 0f);
-            }
+            _movement = new Vector2(horizontalInput, verticalInput).normalized; // Normalizar para evitar velocidad mayor en diagonal
 
             // Flip character (Se usará, pero hay que extenderlo cara a Up, Down, Left, Right)
             /*	if (horizontalInput < 0f && _facingRight == true) 
@@ -69,10 +59,10 @@ public class PlayerControllerSimple : MonoBehaviour
 	{
 		if (_isAttacking == false)
 		{
-			float horizontalVelocity = _movementHorizontal.normalized.x * speed;
+			float horizontalVelocity = _movement.normalized.x * speed;
 			_rigidbody.linearVelocity = new Vector2(horizontalVelocity, _rigidbody.linearVelocity.y);
 
-			float verticalVelocity = _movementVertical.normalized.y * speed;
+			float verticalVelocity = _movement.normalized.y * speed;
 			_rigidbody.linearVelocity = new Vector2(_rigidbody.linearVelocity.x, verticalVelocity);
 		}
     }
