@@ -9,17 +9,13 @@ public class PlayerControllerSimple : MonoBehaviour
 	// References
 	private Rigidbody2D _rigidbody;
 
-    // MOVEMENT VARIABLES
-    // Inputs
-    float horizontalInput;
-	float verticalInput;
-
-    // Directions
+	// Movement
+	float horizontalInput = 0f;
+	float verticalInput = 0f;
     private Vector2 _movementHorizontal;
     private Vector2 _movementVertical;
-
     //private bool _facingRight = true;
-    private bool _isAttacking = false; //Eing?
+	private bool _isAttacking = false;
 
     void Awake()
 	{
@@ -41,14 +37,15 @@ public class PlayerControllerSimple : MonoBehaviour
             float horizontalInput = Input.GetAxisRaw("Horizontal");
             float verticalInput = Input.GetAxisRaw("Vertical");
 
-			if (horizontalInput != 0f)										//Movimiento horizontal
+            if (horizontalInput != 0f)
 			{
-                _movementHorizontal = new Vector2(horizontalInput, 0f);
-				_movementVertical = new Vector2(0f, 0f);
-			}
-			else															//Movimiento vertical
+				_movementHorizontal = new Vector2(horizontalInput, 0f);
+                _movementVertical = new Vector2(0f, 0f);
+
+            }
+			else
 			{
-                _movementVertical = new Vector2(0f, verticalInput);
+				_movementVertical = new Vector2(0f, verticalInput);
                 _movementHorizontal = new Vector2(0f, 0f);
             }
 
