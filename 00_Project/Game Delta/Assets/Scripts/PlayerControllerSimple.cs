@@ -15,7 +15,6 @@ public class PlayerControllerSimple : MonoBehaviour
     private Vector2 _movementHorizontal;
     private Vector2 _movementVertical;
     //private bool _facingRight = true;
-	private bool _isAttacking = false;
 
     void Awake()
 	{
@@ -29,9 +28,8 @@ public class PlayerControllerSimple : MonoBehaviour
 
     void Update()
     {
-		if (_isAttacking == false)
+		if (_rigidbody != false)
 		{
-            // Si no está atacando, se mueve dependiendo de los inputs del user
             // Movement
 
             float horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -64,7 +62,7 @@ public class PlayerControllerSimple : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		if (_isAttacking == false)
+		if (_rigidbody != false)
 		{
 			float horizontalVelocity = _movementHorizontal.normalized.x * speed;
 			_rigidbody.linearVelocity = new Vector2(horizontalVelocity, _rigidbody.linearVelocity.y);
