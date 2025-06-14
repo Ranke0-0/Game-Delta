@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PlayerControllerSimple : MonoBehaviour
 {
-	public float speed = 2.5f;
+    [Range(0f, 10f)]
+    public float speed = 3.3f;
 
 	// References
-	private Rigidbody2D _rigidbody;
+	[SerializeField] private Rigidbody2D _rigidbody;
 
 	// Movement
 	float horizontalInput = 0f;
