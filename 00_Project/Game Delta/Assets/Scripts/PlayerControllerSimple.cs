@@ -10,8 +10,8 @@ public class PlayerControllerSimple : MonoBehaviour
 	// References
 	[SerializeField] private Rigidbody2D _rigidbody;
 
-	// Movement
-	float horizontalInput = 0f;
+    // Movement
+    float horizontalInput = 0f;
 	float verticalInput = 0f;
     private Vector2 _movementHorizontal;
     private Vector2 _movementVertical;
@@ -21,11 +21,6 @@ public class PlayerControllerSimple : MonoBehaviour
 	{
 		_rigidbody = GetComponent<Rigidbody2D>();
 	}
-
-	void Start()
-    {
-        
-    }
 
     void Update()
     {
