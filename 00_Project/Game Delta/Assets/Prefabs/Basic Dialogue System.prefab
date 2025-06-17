@@ -292,6 +292,7 @@ MonoBehaviour:
   - 'NPC
 
     NPC? I am an NPC...?'
+  playerController: {fileID: 0}
   dialogueMark: {fileID: 4411340821180752214}
   dialoguePanel: {fileID: 0}
   dialogueText: {fileID: 0}
