@@ -11,8 +11,8 @@ public class PlayerControllerSimple : MonoBehaviour
 	[SerializeField] private Rigidbody2D _rigidbody;
 
     // Movement
-    float horizontalInput = 0f;
-	float verticalInput = 0f;
+    float horizontalInput;
+    float verticalInput;
     private Vector2 _movementHorizontal;
     private Vector2 _movementVertical;
     //private bool _facingRight = true;
