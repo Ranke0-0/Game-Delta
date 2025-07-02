@@ -10,9 +10,11 @@ public class DialogueTest : MonoBehaviour
     [SerializeField, TextArea(2, 4 )] private string[] dialogueLines;
     private bool isPlayerInRange;
     private bool didDialogueStart = false; // Variable para controlar si el diálogo está activo o no.
-    private int lineIndex = 0; // Índice de la línea de diálogo actual. 
-    private float typingTime = 0.05f;
+    [SerializeField] private int lineIndex = 0; // Índice de la línea de diálogo actual. 
+    [SerializeField] private float typingTime = 0.05f;
     public PlayerControllerSimple playerController; // Referencia al controlador del jugador, si es necesario para otras interacciones.
+    [SerializeField] private int charsToPlayAudio; // Número de caracteres a escribir antes de reproducir el audio del NPC.
+    [SerializeField] private bool isPlayerTalking = false;
 
     [Space]
 
@@ -20,10 +22,19 @@ public class DialogueTest : MonoBehaviour
     [SerializeField] private GameObject dialogueMark; // Referencia al objeto visual que se mostrará al jugador cuando esté en rango.
     [SerializeField] private GameObject dialoguePanel; // Referencia al panel de diálogo que se mostrará al jugador.
     [SerializeField] private TMP_Text dialogueText; // Referencia al cuadro de diálogo que se mostrará al jugador.
+    [SerializeField] private AudioClip npcVoice; // Referencia al audio que se reproducirá durante el diálogo, si es necesario.
+    [SerializeField] private AudioClip playerVoice; // Referencia al audio que se reproducirá durante el diálogo, si es necesario.
+    [SerializeField] private AudioSource audioSource; // Referencia al audio que se reproducirá durante el diálogo, si es necesario.
 
     #endregion
 
     #region METHODS
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>(); // Obtiene el componente AudioSource del objeto actual.
+        audioSource.clip = npcVoice; // Asigna el clip de audio del NPC al AudioSource.
+    }
 
     // Update is called once per frame. Used to see what the player does each frame.
     void Update()
@@ -75,13 +86,41 @@ public class DialogueTest : MonoBehaviour
         }
     }
 
+    private void SelectAudioClip()
+    {
+        if (lineIndex != 0)
+        {
+            isPlayerTalking = !isPlayerTalking; // Alterna el estado de si el jugador está hablando o no.
+        }
+
+        audioSource.clip = isPlayerTalking ? playerVoice : npcVoice; // Cambia el clip de audio según quién esté hablando. Es igual al bloque if comentado a continuación.
+
+        /*if (isPlayerTalking)
+        {
+            audioSource.clip = playerVoice; // Cambia el clip de audio al del jugador si está hablando.
+        }
+        else
+        {
+            audioSource.clip = npcVoice; // Cambia el clip de audio al del NPC si no está hablando.
+        }*/
+    }
+
     private IEnumerator ShowLine()
     {
+        SelectAudioClip(); // Selecciona el clip de audio correcto según quién esté hablando.
         dialogueText.text = string.Empty;
+        int charIndex = 0; // Índice del carácter actual que se está mostrando.
 
-        foreach(char ch in dialogueLines[lineIndex])
+        foreach (char ch in dialogueLines[lineIndex])
         {
             dialogueText.text += ch; // Muestra cada carácter uno por uno.
+
+            if(charIndex % charsToPlayAudio == 0) // Reproduce el audio del NPC cada 'charsToPlayAudio' caracteres.
+            {
+                audioSource.Play(); // Reproduce el clip de audio del NPC.
+            }
+
+            charIndex++;
             yield return new WaitForSecondsRealtime(typingTime); // Espera un poco antes de mostrar el siguiente carácter.
         }
     }
