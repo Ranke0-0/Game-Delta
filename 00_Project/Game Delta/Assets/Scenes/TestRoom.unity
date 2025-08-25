@@ -2864,7 +2864,7 @@ GameObject:
   m_Component:
   - component: {fileID: 509317425}
   - component: {fileID: 509317424}
-  - component: {fileID: 509317426}
+  - component: {fileID: 509317427}
   m_Layer: 0
   m_Name: TP
   m_TagString: Untagged
@@ -2933,7 +2933,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &509317426
+--- !u!114 &509317427
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2945,6 +2945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04b410adbab07164fb2b2b10f14f2626, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneName: TestRoomTp
 --- !u!1 &681639561
 GameObject:
   m_ObjectHideFlags: 0
