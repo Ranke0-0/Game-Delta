@@ -15,7 +15,7 @@ public class DialogueTest : MonoBehaviour
     public PlayerControllerSimple playerController; // Referencia al controlador del jugador, si es necesario para otras interacciones.
     [SerializeField] private int charsToPlayAudio; // Número de caracteres a escribir antes de reproducir el audio del NPC.
     [SerializeField] private bool isPlayerTalking = false;
-
+    
     [Space]
 
     [Header("Dialogue Test References")]
@@ -142,6 +142,6 @@ public class DialogueTest : MonoBehaviour
             dialogueMark.SetActive(false); // Desactiva el objeto visual para indicar que el jugador ya no está en rango.
         }
     }
-    #endregion
 
+    #endregion
 }

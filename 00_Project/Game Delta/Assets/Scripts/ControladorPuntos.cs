@@ -7,7 +7,7 @@ public class ControladorPuntos : MonoBehaviour
     #region VARIABLES
 
     public static ControladorPuntos Instance;
-    [SerializeField] float cantidadPuntos;
+    public int cantidadPuntos;
 
     #endregion
     
@@ -26,7 +26,7 @@ public class ControladorPuntos : MonoBehaviour
         }
     }
 
-    public void SumarPuntos(float puntos)
+    public void SumarPuntos(int puntos)
     {
         cantidadPuntos += puntos;
     }

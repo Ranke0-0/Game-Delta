@@ -7,7 +7,7 @@ public class Collectible : MonoBehaviour
     #region VARIABLES
 
     //[SerializeField] private GameObject efecto;
-    [SerializeField] private float cantidadPuntos;
+    [SerializeField] private int cantidadPuntos;
 
     #endregion
 
